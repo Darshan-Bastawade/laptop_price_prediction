@@ -1,0 +1,205 @@
+{% extends "prediction/base.html" %}
+{% load static %}
+{% block title %}Prediction page{% endblock %}
+
+{% block pageSpecificCSS %}
+   <!-- jQuery UI -->
+   <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+{% endblock pageSpecificCSS %}
+ 
+{% block userSpecificCode %}
+    <!-- Navbar -->
+    
+
+    
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="{% url 'index' %}">Laptop Price prediction</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'index' %}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Prediction</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+<div class="container-fluid py-5">
+
+
+    <!-- Main Content -->
+    <div class="row">
+      <div class="col-lg">
+        <div class="card mb-6">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">Prediction</h5>
+            <!-- <small class="text-body float-end">Default label</small> -->
+          </div>
+          <div class="card-body">
+            <form method="POST" action="{% url 'predict' %}">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-6 mb-6">
+                  <label class="form-label" for="basic-default-fullname">Laptop Brand Name</label>
+                  <input type="text" class="form-control" id="laptop-brand" placeholder="Start to Type brand Name" required>
+                </div>
+                <input type="hidden" id="laptop-brand-id" name="laptop_brand_id">
+                <!-- <div id="error-message" style="color: red; display: none;">Please select a valid option from the list.</div> -->
+                <div class="col-md-6 mb-6">
+                  <label class="form-label" for="basic-default-fullname">Processor Name</label>
+                  <input type="text" class="form-control" id="laptop-processor" placeholder="Start to Type processor Name" required>
+                  <input type="hidden" id="laptop-processor-id" name="laptop_processor_id">
+                  <div id="autocomplete-container"></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-6">
+                    <label for="exampleFormControlSelect1" class="form-label">Ram</label>
+                    <select class="form-select" id="laptop-ram" aria-label="Default select example" name="laptop_ram_id" required>
+                      <option selected="">Select Ram</option>
+                      <option value="8" selected="true">4</option>
+                      <option value="8">8</option>
+                      <option value="12">12</option>
+                      <option value="16">16</option>
+                      <option value="32">32</option>
+                      <option value="64">64</option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-6">
+                  <label for="exampleFormControlSelect1" class="form-label">SSD</label>
+                  <select class="form-select" id="laptop-ssd" aria-label="Default select example" name="laptop_ssd_id" required>
+                    <option selected="">Select Ram</option>
+                    <option value="128" selected="true">128</option>
+                    <option value="256">256</option>
+                    <option value="512">512</option>
+                    <option value="1000">1000</option>
+                    <option value="2000">2000</option>
+                    <option value="4000">4000</option>
+                  </select>
+                  
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-6">
+                  <label for="exampleFormControlSelect1" class="form-label">Hard Disk</label>
+                  <select class="form-select" id="laptop-ssd" aria-label="Default select example" name="laptop_hard_disk_id" required>
+                    <option selected="">Select Ram</option>
+                    <option value="32" selected="true">32</option>
+                    <option value="64">64</option>
+                    <option value="128">128</option>
+                    <option value="1000">1000</option>
+                  </select>
+                </div>
+                <div class="col-md-6 mb-6">
+                  <label for="exampleFormControlSelect1" class="form-label">Operating System</label>
+                  <select class="form-select" id="laptop-os" aria-label="Default select example" name="laptop_os_id" required>
+                    <option selected="">Select Operating System</option>
+                    <option value="4" selected="true">Windows</option>
+                    <option value="0">Chrome</option>
+                    <option value="2">Mac</option>
+                    <option value="3">Ubuntu</option>
+                    <option value="1">DOS</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-6">
+                  <label class="form-label" for="basic-default-fullname">Graphics Card</label>
+                  <input type="text" class="form-control" id="laptop-graphics" placeholder="Start to Type" required>
+                  <input type="hidden" id="laptop-graphics-id" name="laptop_graphics_id">
+                  <div id="autocomplete-container"></div>
+                </div>
+                <div class="col-md-6 mb-6">
+                  <label for="exampleFormControlSelect2" class="form-label">Screen Size</label>
+                  <select class="form-select" id="screen-size" aria-label="Default select example" name="screen_size_id" required>
+                    <option selected="">Select Screen Size</option>
+                    <option value="15.60" selected="true">15.60</option>
+                    <option value="14.00">14.00</option>
+                    <option value="16.00">16.00</option>
+                    <option value="13.30">13.30</option>
+                    <option value="17.30">17.30</option>
+                    <option value="16.10">16.10</option>
+                    <option value="13.40">13.40</option>
+                    <option value="14.10">14.10</option>
+                    <option value="11.60">11.60</option>
+                    <option value="13.50">13.50</option>
+                    <option value="15.00">15.00</option>
+                    <option value="14.50">14.50</option>
+                    <option value="13.60">13.60</option>
+                    <option value="16.20">16.20</option>
+                    <option value="13.00">13.00</option>
+                    <option value="14.20">14.20</option>
+                    <option value="17.32">17.32</option>
+                    <option value="12.40">12.40</option>
+                    <option value="15.56">15.56</option>
+                    <option value="17.00">17.00</option>
+                    <option value="10.10">10.10</option>
+                  </select>                  
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-6">
+                  <label class="form-label" for="basic-default-fullname">Resolution (pixels)</label>
+                  <input type="text" class="form-control" id="laptop-resolution" placeholder="Start to Type" required>
+                  <input type="hidden" id="laptop-resolution-id" name="laptop_resolution_id">
+                  <div id="autocomplete-container"></div>
+                </div>
+                <div class="col-md-6 mb-6">
+                  <label for="exampleFormControlSelect3" class="form-label">Number of Cores</label>
+                  <select class="form-select" id="num-cores" aria-label="Default select example" name="num_cores_id" required>
+                    <option selected="">Select Number of Cores</option>
+                    <option value="4" selected="true">4</option>
+                    <option value="8">8</option>
+                    <option value="2">2</option>
+                    <option value="6">6</option>
+                    <option value="10">10</option>
+                    <option value="14">14</option>
+                    <option value="12">12</option>
+                    <option value="16">16</option>
+                  </select>
+                  
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-6">
+                  <label for="exampleFormControlSelect4" class="form-label">Number of Threads</label>
+                  <select class="form-select" id="num-threads" aria-label="Default select example" name="num_threads_id" required>
+                    <option selected="">Select Number of Threads</option>
+                    <option value="12" selected="true">12</option>
+                    <option value="16">16</option>
+                    <option value="8">8</option>
+                    <option value="4">4</option>
+                    <option value="20">20</option>
+                    <option value="2">2</option>
+                    <option value="24">24</option>
+                    <option value="6">6</option>
+                  </select>
+                  
+                </div>
+                <div class="col-md-6 mb-6">
+                  <input type="hidden" id="spec-score" name="spec_score" value="69">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+    <!-- Bootstrap JS -->
+    {% endblock userSpecificCode %}
+    {% block pageSpecificJS %}
+    <script src="{% static 'prediction/assets/js/prediction.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    {% endblock pageSpecificJS %}

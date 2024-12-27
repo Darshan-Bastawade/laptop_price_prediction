@@ -1,0 +1,64 @@
+{% extends "prediction/base.html" %}
+{% load static %}
+{% block title %}Home page{% endblock %}
+
+{% block pageSpecificCSS %}
+<!-- jQuery UI -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+{% endblock pageSpecificCSS %}
+
+{% block userSpecificCode %}
+<!-- Navbar -->
+
+
+
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'predict' %}">Laptop Price prediction</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'predict' %}">Prediction</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="container-fluid py-5">
+  <!-- Main Content -->
+  <div class="d-flex justify-content-center">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h5 class="mb-0">Welcome to Laptop Price Prediction</h5>
+        </div>
+        <div class="card-body">
+          Empowering you with accurate laptop price predictions to help you make
+          informed buying decisions. Discover how our advanced algorithms
+          can estimate the price of any laptop based on its specifications,
+          market trends, and more.
+        </div>
+        <a href="{% url 'predict' %}">
+          <button type="button" class="btn btn-outline-primary w-80 m-5">
+            Get Started
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Bootstrap JS -->
+{% endblock userSpecificCode %}
+{% block pageSpecificJS %}
+<script src="{% static 'prediction/assets/js/prediction.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+{% endblock pageSpecificJS %}

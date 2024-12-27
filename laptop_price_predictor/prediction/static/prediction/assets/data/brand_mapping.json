@@ -1,0 +1,25 @@
+{
+    "AGB": 0,
+    "Acer": 1,
+    "Apple": 2,
+    "Asus": 3,
+    "Avita": 4,
+    "Chuwi": 5,
+    "Dell": 6,
+    "Fujitsu": 7,
+    "Gigabyte": 8,
+    "HP": 9,
+    "Honor": 10,
+    "Huawei": 11,
+    "Infinix": 12,
+    "LG": 13,
+    "Lenovo": 14,
+    "MSI": 15,
+    "Microsoft": 16,
+    "Nokia": 17,
+    "Realme": 18,
+    "Samsung": 19,
+    "Ultimus": 20,
+    "Xiaomi": 21
+  }
+  

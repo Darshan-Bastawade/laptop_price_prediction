@@ -1,0 +1,7 @@
+{
+    "Chrome": 0,
+    "DOS": 1,
+    "Mac": 2,
+    "Ubuntu": 3,
+    "Windows": 4
+}
